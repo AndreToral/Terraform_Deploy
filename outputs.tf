@@ -3,6 +3,6 @@ output "grafana_url" {
 }
 
 output "postgres_connection" {
-  value = "postgresql://${var.postgres_user}:${var.postgres_password}@localhost:8080/${var.postgres_db}"
+  value = "postgresql://${var.postgres_user}:${var.postgres_password}@localhost:5432/${var.postgres_db}"
   sensitive = true
 }
