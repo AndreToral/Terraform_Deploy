@@ -18,6 +18,13 @@ variable "postgres_image" {
   default = "postgres:13-trixie"
 }
 
+# Variable de monitoreo
+variable "grafana_image" {
+  description = "Imagen de Grafana"
+  type        = string
+  default = "grafana/grafana:12.2.0-17660687647"
+}
+
 # Variables de conexion a postgreSQL
 variable "postgres_user" {
   description = "Usuario de PostgreSQL"
