@@ -1,3 +1,10 @@
+# Variables de la app Nginxs
+variable "app_image" {
+  description = "Imagen de la aplicación base"
+  type        = string
+  default = "nginx:stable-perl"
+}
+
 # Variables de redes
 variable "app_net_name" {
   description = "Nombre de la red para las apps"
