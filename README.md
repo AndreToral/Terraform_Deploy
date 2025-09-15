@@ -19,7 +19,7 @@ Todo el despliegue está contenido en código y versionado en este repositorio.
 ## 📂 Estructura del proyecto
 
 ```bash
-.
+Terraform_Deploy/
 ├── apps.tf                # Aplicaciones dummy basadas en nginx
 ├── database.tf            # Bases de datos PostgreSQL y Redis
 ├── main.tf                # Configuración principal
