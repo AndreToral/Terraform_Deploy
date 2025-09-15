@@ -7,6 +7,11 @@ resource "docker_container" "redis" {
   networks_advanced {
     name = docker_network.persistence_net.name
   }
+
+  ports {
+    internal = 6379
+    external = 6379
+  }
 }
 
 # Contenedor de PostgreSQL
@@ -23,5 +28,10 @@ resource "docker_container" "postgres" {
 
   networks_advanced {
     name = docker_network.persistence_net.name
+  }
+
+  ports {
+    internal = 5432
+    external = 6000
   }
 }
