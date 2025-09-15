@@ -8,6 +8,17 @@ resource "docker_container" "app1" {
     name = docker_network.app_net.name
   }
 
+  # La app necesita estar en ambas redes:
+  # 1) monitor_net: para que Grafana pueda acceder a la app
+  # 2) persistence_net: para que la app pueda conectarse con Redis/Postgres
+  networks_advanced {
+    name = docker_network.monitor_net.name
+  }
+  
+  networks_advanced {
+    name = docker_network.persistence_net.name
+  }
+  
   # Exposicion de puertos: el contenedor escucha en el 80,
   # y se publica hacia el host en el puerto 8081
   ports {
@@ -25,6 +36,14 @@ resource "docker_container" "app2" {
     name = docker_network.app_net.name
   }
 
+  networks_advanced {
+    name = docker_network.monitor_net.name
+  }
+  
+  networks_advanced {
+    name = docker_network.persistence_net.name
+  }
+
   ports {
     internal = 80
     external = 8082
@@ -40,6 +59,14 @@ resource "docker_container" "app3" {
     name = docker_network.app_net.name
   }
 
+  networks_advanced {
+    name = docker_network.monitor_net.name
+  }
+  
+  networks_advanced {
+    name = docker_network.persistence_net.name
+  }
+  
   ports {
     internal = 80
     external = 8083
