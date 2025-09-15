@@ -87,3 +87,7 @@ Este proyecto sigue la Conventional Commits para mantener un historial limpio:
 - ```refactor:``` ➝ Refactorización de código sin cambio funcional
 - ```style:``` ➝ Cambios de formato (no afectan lógica)
 - ```test:``` ➝ Añadir o modificar pruebas
+
+# 📌 Arquitectura
+La siguiente imagen representa la arquitectura del entorno desplegado:
+<img width="772" height="575" alt="Image" src="https://github.com/user-attachments/assets/341f6b2d-ef8b-4810-be49-4ecda438403a" />
