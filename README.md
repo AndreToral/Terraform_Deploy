@@ -52,7 +52,7 @@ terraform init
 
 ## 3. Revisar las variables
 
-Puedes personalizar ```terraform.tfvars``` para definir usuario/contraseña de PostgreSQL, puertos, etc.
+Puedes personalizar ```terraform.tfvars``` para definir usuario/contraseña de PostgreSQL, etc.
 
 ## 4. Aplicar el despliegue
 
