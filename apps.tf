@@ -19,17 +19,18 @@ resource "docker_container" "app1" {
     name = docker_network.persistence_net.name
   }
   
-  # Exposicion de puertos: el contenedor escucha en el 5678,
+  # Exposicion de puertos: el contenedor escucha en el 80,
   # y se publica hacia el host en el puerto 8081
   ports {
-    internal = 5678
+    internal = 80
     external = 8081
   }
 
-  command = [
-    "-text=Hola Mundo 1",
-    "-listen=:5678"
-  ]
+  # Montar HTML personalizado
+  volumes {
+    host_path      = "${path.module}/ansible/files/index1.html"
+    container_path = "/usr/share/nginx/html/index.html"
+  }
 }
 
 # Segunda aplicacion nginx, expuesta en el puerto 8082
@@ -50,14 +51,14 @@ resource "docker_container" "app2" {
   }
 
   ports {
-    internal = 5678
+    internal = 80
     external = 8082
   }
 
-  command = [
-    "-text=Hola Mundo 1",
-    "-listen=:5678"
-  ]
+  volumes {
+    host_path      = "${path.module}/ansible/files/index2.html"
+    container_path = "/usr/share/nginx/html/index.html"
+  }
 }
 
 # Tercera aplicacion nginx, expuesta en el puerto 8083
@@ -78,12 +79,12 @@ resource "docker_container" "app3" {
   }
   
   ports {
-    internal = 5678
+    internal = 80
     external = 8083
   }
 
-  command = [
-    "-text=Hola Mundo 1",
-    "-listen=:5678"
-  ]
+  volumes {
+    host_path      = "${path.module}/ansible/files/index3.html"
+    container_path = "/usr/share/nginx/html/index.html"
+  }
 }
