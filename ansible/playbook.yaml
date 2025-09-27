@@ -5,7 +5,6 @@
   vars:
     project_root: "{{ playbook_dir }}/.."
     nginx_conf_host: "{{ project_root }}/host_volumes/nginx_conf"
-    web_conf_host: "{{ project_root }}/host_volumes/web"
     nginx_container: "nginx_proxy"
 
   tasks:
@@ -17,12 +16,6 @@
       loop:
         - "{{nginx_conf_host}}"
         - "{{web_conf_host}}"
-
-    - name: Copiar la pagina web
-      ansible.builtin.copy:
-        src: "files/index.html"
-        dest: "{{web_conf_host}}/index.html"
-        mode: "0644"
 
     - name: Copiar la configuracion de NGINX
       ansible.builtin.copy:
