@@ -8,8 +8,11 @@
 
 Este proyecto despliega un **entorno de desarrollo (DEV)** usando **Terraform** y **Docker**.
 
+Tambien implementa un entorno de aplicaciones Docker con **Terraform** y **Ansible**, donde se despliegan tres aplicaciones basadas en NGINX y un **proxy inverso NGINX** que actúa como **balanceador de carga Round Robin**.
+
 ## 📦 Servicios incluidos
 - 3 Apps (Nginx)
+- Proxy inverso (Nginx, puerto 8000)
 - Redis
 - PostgreSQL
 - Grafana (puerto 3000)
@@ -20,14 +23,26 @@ Todo el despliegue está contenido en código y versionado en este repositorio.
 
 ```bash
 Terraform_Deploy/
-├── apps.tf                # Aplicaciones dummy basadas en nginx
-├── database.tf            # Bases de datos PostgreSQL y Redis
-├── main.tf                # Configuración principal
-├── monitoring.tf          # Servicio de Grafana
-├── networks.tf            # Redes de Docker
-├── outputs.tf             # Salidas útiles (ej: conexión a la DB)
-├── terraform.tfvars       # Valores por defecto de las variables
-└── variables.tf           # Variables reutilizables
+├── ansible/
+├── 📂 files/
+│ │ └── index.html # Página web estática
+│ ├── 📂 templates/
+│ │ └── nginx.conf          # Configuración del proxy NGINX
+│ ├── inventory.ini         # Inventario de Ansible
+│ └── playbook.yaml         # Playbook para configurar proxy y web              
+├── apps.tf                 # Aplicaciones dummy basadas en nginx
+├── database.tf             # Bases de datos PostgreSQL y Redis
+├── main.tf                 # Configuración principal
+├── monitoring.tf           # Servicio de Grafana
+├── networks.tf             # Redes de Docker
+├── apps.tf                 # Aplicaciones dummy basadas en nginx
+├── database.tf             # Bases de datos PostgreSQL y Redis
+├── main.tf                 # Configuración principal
+├── monitoring.tf           # Servicio de Grafana
+├── networks.tf             # Redes de Docker
+├── outputs.tf              # Salidas útiles (ej: conexión a la DB)
+├── terraform.tfvars        # Valores por defecto de las variables
+└── variables.tf            # Variables reutilizables
 ```
 
 ## 🔧 Requisitos
@@ -70,6 +85,32 @@ terraform output
 - Grafana: http://localhost:3000
 - Usuario_Grafana: ```admin``` | Password: ```admin```
 - Apps: disponibles en los puertos configurados en ```apps.tf```
+
+## 7. 🌍 Validación (Balanceador)
+
+## 7.1. Configurar proxy y página web en Ansible
+```bash
+cd ../ansible
+ansible-playbook -i inventory.ini playbook.yaml
+```
+
+## 7.2. Acceder a la web estática:
+```bash
+curl http://localhost:8080/web
+```
+Muestra ```Bienvenidos al Laboratorio N°4```
+
+## 7.3. Acceder al backend balanceado:
+
+```bash
+curl http://localhost:8080/api
+```
+Responde en round robin:
+```bash
+Hola Mundo 1
+Hola Mundo 2
+Hola Mundo 3
+```
 
 # 🧹 Destruir el entorno
 Cuando ya no necesites el entorno de desarrollo, simplemente ejecuta:
