@@ -28,7 +28,7 @@ resource "docker_container" "app1" {
 
   # Montar HTML personalizado
   volumes {
-    host_path      = "${path.module}/ansible/files/index1.html"
+    host_path      = abspath("${path.module}/ansible/files/index1.html")
     container_path = "/usr/share/nginx/html/index.html"
   }
 }
@@ -56,7 +56,7 @@ resource "docker_container" "app2" {
   }
 
   volumes {
-    host_path      = "${path.module}/ansible/files/index2.html"
+    host_path      = abspath("${path.module}/ansible/files/index2.html")
     container_path = "/usr/share/nginx/html/index.html"
   }
 }
@@ -84,7 +84,7 @@ resource "docker_container" "app3" {
   }
 
   volumes {
-    host_path      = "${path.module}/ansible/files/index3.html"
+    host_path      = abspath("${path.module}/ansible/files/index3.html")
     container_path = "/usr/share/nginx/html/index.html"
   }
 }
