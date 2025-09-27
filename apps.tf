@@ -19,12 +19,17 @@ resource "docker_container" "app1" {
     name = docker_network.persistence_net.name
   }
   
-  # Exposicion de puertos: el contenedor escucha en el 80,
+  # Exposicion de puertos: el contenedor escucha en el 5678,
   # y se publica hacia el host en el puerto 8081
   ports {
-    internal = 80
+    internal = 5678
     external = 8081
   }
+
+  command = [
+    "-text=Hola Mundo 1",
+    "-listen=:5678"
+  ]
 }
 
 # Segunda aplicacion nginx, expuesta en el puerto 8082
@@ -45,9 +50,14 @@ resource "docker_container" "app2" {
   }
 
   ports {
-    internal = 80
+    internal = 5678
     external = 8082
   }
+
+  command = [
+    "-text=Hola Mundo 1",
+    "-listen=:5678"
+  ]
 }
 
 # Tercera aplicacion nginx, expuesta en el puerto 8083
@@ -68,7 +78,12 @@ resource "docker_container" "app3" {
   }
   
   ports {
-    internal = 80
+    internal = 5678
     external = 8083
   }
+
+  command = [
+    "-text=Hola Mundo 1",
+    "-listen=:5678"
+  ]
 }
